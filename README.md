@@ -5,7 +5,7 @@ common 生成验证码图片数据集
 
 mydataset 加载数据集（调用one-hot文件）
 
-one-hot 
+one-hot 将图片信息转为ont-hot编码
 
 
 
