@@ -1,3 +1,5 @@
+#生成数据集（训练集和验证集的验证码图片数据）
+
 import os
 import random
 import time
