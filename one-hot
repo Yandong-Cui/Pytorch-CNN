@@ -1,0 +1,29 @@
+import common
+import torch
+import torch.nn.functional as F
+def text2vec(text):    #文本转变量
+    #4列（验证码由4个数组成）36行（36个情况）
+    vectors=torch.zeros((common.captcha_size,common.captcha_array.__len__()))    #生成4行36列的全0数组
+    # vectors[0,0] = 1
+    # vectors[1,3] = 1
+    # vectors[2,4] = 1
+    # vectors[3, 1] = 1
+
+    for i in range(len(text)):
+        vectors[i,common.captcha_array.index(text[i])]=1   #根据验证码实际内容将生成的4行36列的全0数组对应位置转为1
+    return vectors
+def vectotext(vec):   #把转换的向量转换回实际的内容，比如aa11通过text2vec转换成one-hot编码后再通过这里把one-hot编码转换成aa11
+
+    vec=torch.argmax(vec,dim=1)   #获取当前验证码4个元素在captcha_array表中的索引
+
+    text_label=""
+    for v in vec:
+        text_label+=common.captcha_array[v]   #captcha_array：这是common定义的列表用来存放0-9和a-z
+    return  text_label
+
+if __name__ == '__main__':
+    vec=text2vec("aaab")
+    print(vec.shape)
+
+
+    print(vectotext(vec))
